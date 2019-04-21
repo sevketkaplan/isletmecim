@@ -1,0 +1,105 @@
+
+<div class="wrapper ">
+	<%= render 'shared/sidebar'%>
+	<div class="main-panel">
+		<%= render 'shared/navbar'%>
+		<div class="content">
+
+			<div class="container-fluid">
+
+				<br>
+				<div class="row">
+					<div class="col-md-3"><!--left col-->
+
+						<div class="text-center">
+							<img src="/assets/kep.png" style="width: 250px; height: 200px;" class="avatar img-circle img-thumbnail" alt="avatar">
+						</div>
+						<hr> 
+						<h3 class="text-center"><%="#{@user.first_name} #{@user.last_name}"%></h3>
+						<hr>
+						
+						<%=link_to "Düzenle", edit_user_path(@user), class: "btn btn-primary btn-round btn-block"%>
+
+						<%= button_to "Hesabı sil", @user, method: :delete, data:{confirm: 'Hesabı silmek istediğinize emin misiniz?'}, class: "btn btn-primary btn-round btn-block" %></p>
+						<br>
+					</div><!--/col-3-->
+
+
+					<div class="col-md-9">
+						<div class="card">
+							<div class="card-header card-header-primary">
+								<img class="img pull-right" src="/assets/kep.png" style="width: 90px; height: 90px; padding-top: 20px;" />
+								<h4 class="card-title" style="padding-top: 20px;">Kayıt</h4>
+								<p class="card-category">Otomasyon Kayıt</p>
+							</div>
+							<div class="card-body">
+								<%=form_for @user, data: {abide: ''} do |form|%>
+								<%if @user.errors.any?%>
+								<div class="row panel callout radius">
+									<p>Aşağıdaki hataları düzeltip, tekrar deneyiniz.</p>
+									<ul class="square">
+										<%@user.errors.full_messages.each do |message|%>
+										<li><%=message%></li>
+										<%end%>
+									</ul>
+								</div>
+								<%end%>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="bmd-label-floating">Adınız</label>
+											<%=form.text_field :first_name, class: "form-control"%>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="bmd-label-floating">Soyadınız</label>
+											<%=form.text_field :last_name, class: "form-control"%>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="bmd-label-floating">Kullanıcı Adı</label>
+											<%=form.text_field :username, class: "form-control"%>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="bmd-label-floating">E-Posta</label>
+											<%=form.email_field :email, class: "form-control"%>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="bmd-label-floating">Şifre</label>
+											<%=form.password_field :password, class: "form-control"%>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="bmd-label-floating">Şifre tekrar</label>
+											<%=form.password_field :password_confirmation,class: "form-control"%>
+										</div>
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary btn-block ">Kayıt Ol</button>
+								<%end%>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+		<%= render 'shared/footer'%>
+	</div>
+</div>
