@@ -33,12 +33,14 @@
           <p>Kullanıcılar</p>
         </a>
       </li>
+      <%if signed_in?%>      
       <li class="nav-item ">
-        <a class="nav-link" href="#"  data-method="delete">
+        <a class="nav-link" href="<%=logout_path%>"  data-method="delete">
           <i class="material-icons">power_settings_new</i>
           <p>Çıkış</p>
         </a>
       </li>
+      <%end%>
     </ul>
   </div>
 </div>
