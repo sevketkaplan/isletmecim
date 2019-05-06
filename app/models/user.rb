@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 	has_secure_password
-
+	belongs_to :salesproduct
 	validates :username,   presence:   true,
 	exclusion: {in: ['oturum_ac']},
 	uniqueness: { case_sensitive: false },
@@ -9,11 +9,10 @@ class User < ApplicationRecord
 	exclusion:  { in: ['oturum_ac'] }
 	validates :first_name, presence:   true
 	validates :last_name,  presence:   true
+	validates :company_name, presence:   true
 	validates :email,      presence:   true,
 	uniqueness: { case_sensitive: false },
 	email:      true
-
-	
 
 	def to_param
 		username

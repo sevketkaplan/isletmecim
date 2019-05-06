@@ -10,7 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_21_212921) do
+ActiveRecord::Schema.define(version: 2019_05_06_181625) do
+
+  create_table "brands", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "company_name"
+    t.datetime "created_at", null: false
+    t.integer "user_id"
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_customers_on_user_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.integer "amount"
+    t.float "unit_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "brand_id"
+    t.index ["brand_id"], name: "index_products_on_brand_id"
+  end
+
+  create_table "salesproducts", force: :cascade do |t|
+    t.integer "unit"
+    t.float "total_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "product_id"
+    t.integer "user_id"
+    t.index ["product_id"], name: "index_salesproducts_on_product_id"
+    t.index ["user_id"], name: "index_salesproducts_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
@@ -20,6 +55,7 @@ ActiveRecord::Schema.define(version: 2019_04_21_212921) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "company_name"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Salesproducts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Unit</th>
+      <th>Total price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @salesproducts.each do |salesproduct| %>
+      <tr>
+        <td><%= salesproduct.unit %></td>
+        <td><%= salesproduct.total_price %></td>
+        <td><%= link_to 'Show', salesproduct %></td>
+        <td><%= link_to 'Edit', edit_salesproduct_path(salesproduct) %></td>
+        <td><%= link_to 'Destroy', salesproduct, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Salesproduct', new_salesproduct_path %>

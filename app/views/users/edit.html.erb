@@ -17,8 +17,8 @@
 						<hr> 
 						<h3 class="text-center"><%="#{@user.first_name} #{@user.last_name}"%></h3>
 						<hr>
-						
-						<%=link_to "Düzenle", edit_user_path(@user), class: "btn btn-primary btn-round btn-block"%>
+
+						<%=link_to "Hesabı Düzenle", edit_user_path(@user), class: "btn btn-primary btn-round btn-block"%>
 
 						<%= button_to "Hesabı sil", @user, method: :delete, data:{confirm: 'Hesabı silmek istediğinize emin misiniz?'}, class: "btn btn-primary btn-round btn-block" %></p>
 						<br>
@@ -44,6 +44,14 @@
 									</ul>
 								</div>
 								<%end%>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="bmd-label-floating">Şirket Adı</label>
+											<%=form.text_field :company_name, class: "form-control"%>
+										</div>
+									</div>
+								</div>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">

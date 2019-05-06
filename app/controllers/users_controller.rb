@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	#before_action :validate_user! 
 	before_action :select_user, only: [:show, :edit, :update, :destroy]
 	before_action only: [:edit, :update, :destroy] do
 		validate_permission! select_user
