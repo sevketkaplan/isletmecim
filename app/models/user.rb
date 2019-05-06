@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 	has_secure_password
 	belongs_to :salesproduct
+	belongs_to :customerbalance
 	validates :username,   presence:   true,
 	exclusion: {in: ['oturum_ac']},
 	uniqueness: { case_sensitive: false },

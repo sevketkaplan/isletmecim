@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Customerbalances</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Total balance</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customerbalances.each do |customerbalance| %>
+      <tr>
+        <td><%= customerbalance.total_balance %></td>
+        <td><%= link_to 'Show', customerbalance %></td>
+        <td><%= link_to 'Edit', edit_customerbalance_path(customerbalance) %></td>
+        <td><%= link_to 'Destroy', customerbalance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Customerbalance', new_customerbalance_path %>

@@ -1,0 +1,22 @@
+<%= form_with(model: customerbalance, local: true) do |form| %>
+  <% if customerbalance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(customerbalance.errors.count, "error") %> prohibited this customerbalance from being saved:</h2>
+
+      <ul>
+      <% customerbalance.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :total_balance %>
+    <%= form.text_field :total_balance %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

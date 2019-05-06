@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_181625) do
+ActiveRecord::Schema.define(version: 2019_05_06_203118) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "customerbalances", force: :cascade do |t|
+    t.float "total_balance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_customerbalances_on_user_id"
   end
 
   create_table "customers", force: :cascade do |t|

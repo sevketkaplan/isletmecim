@@ -25,14 +25,23 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(product_params)
-
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+    
+    if Product.exists?(name: @product.name)
+      @oldproduct=Product.find_by_name(@product.name)
+      @oldproduct.amount+=@product.amount
+      @oldproduct.unit_price=@product.unit_price
+      @oldproduct.save
+      flash[:notice] = "Bu ürün zaten KAYITLI, mevcut ürün miktarı arttırıldı !!"
+      redirect_to products_url
+    else
+      respond_to do |format|
+        if @product.save
+          format.html { redirect_to @product, notice: 'Product was successfully created.' }
+          format.json { render :show, status: :created, location: @product }
+        else
+          format.html { render :new }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -71,4 +80,4 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:brand_id,:name, :amount, :unit_price)
     end
-end
+  end

@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Total balance:</strong>
+  <%= @customerbalance.total_balance %>
+</p>
+
+<%= link_to 'Edit', edit_customerbalance_path(@customerbalance) %> |
+<%= link_to 'Back', customerbalances_path %>
