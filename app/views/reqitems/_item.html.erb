@@ -1,0 +1,26 @@
+<div class="card-body">
+  <div class="table-responsive">
+
+   <table class="table" id="myTable">
+    <thead>
+      <tr>
+       <th>ID</th>
+       <th>URUN ID</th>
+       <th>AMOUNT</th>
+       <th>SEPET ID</th>
+     </tr>
+   </thead>
+   <tbody class="items">
+    <% @order.reqitems.each do |reqitem| %>
+    <tr>
+      <td><%=reqitem.id%></td>
+      <td><%=reqitem.product_id%></td>
+      <td><%=reqitem.amount%></td>
+      <td><%=reqitem.order_id%></td>
+    </tr>
+    <%end%>
+  </tbody>
+  <%=link_to 'Siparişi Tamamla', orders_path,class:"btn btn-success fa fa-shoping-cart"%>
+</table>
+</div>
+</div>

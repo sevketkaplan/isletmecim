@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :orders do
+    resources :reqitems
+  end
+  
   resources :customerbalances
   resources :salesproducts
   resources :products
@@ -18,7 +22,7 @@ Rails.application.routes.draw do
   get '/:id', to: 'users#show', as: :profile
   get '/:id/edit', to: 'users#edit', as: :edit_profile
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root "sessions#new"
+  root "users#show"
   
   
 end

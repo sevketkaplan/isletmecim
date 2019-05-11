@@ -1,0 +1,123 @@
+ <div class="wrapper ">
+  <%= render 'shared/sidebar'%>
+  <div class="main-panel">
+    <%= render 'shared/navbar'%>
+    <div class="content">
+
+      <div class="container-fluid">
+
+        <br>
+        <div class="row">
+          <div class="col-md-3"><!--left col-->
+
+            <div class="text-center">
+              <img src="/assets/kep.png" style="width: 250px; height: 200px;" class="avatar img-circle img-thumbnail" alt="avatar">
+            </div>
+            <hr> 
+            <h3 class="text-center"><%=current_user.first_name%>  <%=current_user.last_name%></h3>
+            <hr>
+
+            <br>
+            <%= form_with(model: @order, local: true) do |form| %>
+
+            <div class="field">
+             
+              <%= form.hidden_field :req_key %>
+            </div>
+
+            <div class="actions">
+              <%= form.submit 'Sipariş Oluştur',class: "btn btn-primary btn-round btn-block" %>
+            </div>
+            <% end %>
+          </div><!--/col-3-->
+          <div class="col-md-9">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+
+                 <div class="row">
+                  <div class="col-md-6">
+                    <h4 class="card-title ">Siparisler</h4>
+                    <p class="card-category">Siparis Listesi</p>
+                  </div>
+                  <div class="col-md-6">
+
+                    <form class="navbar-form">
+                      <div class="input-group no-border">
+                        <input type="text" id="search" onkeyup="myFunction()" value="" class="form-control" placeholder="Kullanıcı İsiminde Arayınız." style="text-color: white;">
+                        <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                          <i class="material-icons">search</i>
+                          <div class="ripple-container"></div>
+                        </button>
+                      </div>
+                    </form>  
+
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+
+                 <table class="table" id="myTable">
+                  <thead>
+                    <tr>
+                     <th>SEPET ID</th>
+                     <th>USER ID</th>
+                     <th>DATE</th>
+                     <th>ORDER COUNT</th>
+                   </tr>
+                 </thead>
+                 <tbody class="items">
+                  <% @orders.each do |order| %>
+                  <tr>
+                    <td><%=link_to order.req_key,order_reqitems_path(order)%></td>
+                    <td><%=order.user_id%></td>
+                    <td><%=order.created_at.strftime('%d-%m-%Y')%></td>
+                    <td><%=order.reqitems.count%></td>
+                  </tr>
+                  <%end%>
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+<%= render 'shared/footer'%>
+</div>
+</div>
+
+<script>  
+  $(document).ready(function(){  
+   $('#search').keyup(function(){  
+    search_table($(this).val());  
+  });  
+   function search_table(value){  
+    $('#myTable tr').each(function(){  
+     var found = 'false';  
+     $(this).each(function(){  
+      if($(this).text().toUpperCase().indexOf(value.toUpperCase()) >= 0)  
+      {  
+       found = 'true';  
+     }  
+   });  
+     if(found == 'true')  
+     {  
+      $(this).show();  
+    }  
+    else  
+    {  
+      $(this).hide();  
+    }  
+  });  
+  }  
+});  
+</script>  

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	#before_action :validate_user! 
+	
 	before_action :select_user, only: [:show, :edit, :update, :destroy]
 	before_action only: [:edit, :update, :destroy] do
 		validate_permission! select_user
@@ -22,7 +22,12 @@ class UsersController < ApplicationController
 	end
 	def edit
 	end
-
+	def create_order
+		@order=Order.new
+		@order.user=current_user
+		@order.save
+		redirect_to @order	
+	end
 	
 	def update
 		update_params = user_params

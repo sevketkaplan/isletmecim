@@ -14,14 +14,26 @@
  							<img src="/assets/kep.png" style="width: 250px; height: 200px;" class="avatar img-circle img-thumbnail" alt="avatar">
  						</div>
  						<hr> 
- 						<h3 class="text-center"><%="#{@user.first_name} #{@user.last_name}"%></h3>
+ 						<h3 class="text-center"><%=current_user.first_name%>  <%=current_user.last_name%></h3>
  						<hr>
+ 						<%= form_with(model: Order.new, local: true) do |form| %>
+
+ 						<div class="field">
+
+ 							<%= form.hidden_field :req_key %>
+ 						</div>
+
+ 						<div class="actions">
+ 							<%= form.submit 'Sipariş Oluştur',class: "btn btn-primary btn-round btn-block" %>
+ 						</div>
+ 						<% end %>
+ 						<hr>						
  						<% if current_user==@user%>
  						<%=link_to "Düzenle", edit_user_path(@user), class: "btn btn-primary btn-round btn-block"%>
 
  						<%= button_to "Hesabı sil", @user, method: :delete, data:{confirm: 'Hesabı silmek istediğinize emin misiniz?'}, class: "btn btn-primary btn-round btn-block" %></p>
  						<%end%>
-						 <br>
+ 						<br>
  					</div><!--/col-3-->
 
 

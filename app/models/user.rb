@@ -1,7 +1,10 @@
 class User < ApplicationRecord
 	has_secure_password
-	belongs_to :salesproduct
-	belongs_to :customerbalance
+	has_many :customerbalances
+	has_many :orders
+	has_many :salesproducts
+
+
 	validates :username,   presence:   true,
 	exclusion: {in: ['oturum_ac']},
 	uniqueness: { case_sensitive: false },
