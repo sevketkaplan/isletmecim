@@ -66,6 +66,9 @@ end
   # DELETE /orders/1
   # DELETE /orders/1.json
   def destroy
+    @order.reqitems.each do |reqitem|
+      reqitem.destroy
+    end
     @order.destroy
     respond_to do |format|
       format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }

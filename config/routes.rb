@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get '/:id', to: 'users#show', as: :profile
   get '/:id/edit', to: 'users#edit', as: :edit_profile
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root "users#show"
+  root "sessions#new"
   
   
 end

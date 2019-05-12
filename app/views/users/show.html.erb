@@ -14,7 +14,7 @@
  							<img src="/assets/kep.png" style="width: 250px; height: 200px;" class="avatar img-circle img-thumbnail" alt="avatar">
  						</div>
  						<hr> 
- 						<h3 class="text-center"><%=current_user.first_name%>  <%=current_user.last_name%></h3>
+ 						<h3 class="text-center"><%=@user.first_name%>  <%=@user.last_name%></h3>
  						<hr>
  						<%= form_with(model: Order.new, local: true) do |form| %>
 
@@ -29,7 +29,7 @@
  						<% end %>
  						<hr>						
  						<% if current_user==@user%>
- 						<%=link_to "Düzenle", edit_user_path(@user), class: "btn btn-primary btn-round btn-block"%>
+ 						<%=link_to "Hesabı Düzenle", edit_user_path(@user), class: "btn btn-primary btn-round btn-block"%>
 
  						<%= button_to "Hesabı sil", @user, method: :delete, data:{confirm: 'Hesabı silmek istediğinize emin misiniz?'}, class: "btn btn-primary btn-round btn-block" %></p>
  						<%end%>
@@ -38,13 +38,66 @@
 
 
  					<div class="col-md-9">
+ 						<div class="col-md-12">
+ 							<div class="card">
+ 								<div class="card-header card-header-primary">
+
+ 									<div class="row">
+ 										<div class="col-md-6">
+ 											<h4 class="card-title ">Siparisler</h4>
+ 											<p class="card-category">Siparis Listesi</p>
+ 										</div>
+ 										<div class="col-md-6">
+
+ 											<form class="navbar-form">
+ 												<div class="input-group no-border">
+ 													<input type="text" id="search" onkeyup="myFunction()" value="" class="form-control" placeholder="Kullanıcı İsiminde Arayınız." style="text-color: white;">
+ 													<button type="submit" class="btn btn-white btn-round btn-just-icon">
+ 														<i class="material-icons">search</i>
+ 														<div class="ripple-container"></div>
+ 													</button>
+ 												</div>
+ 											</form>  
+
+ 										</div>
+ 									</div>
+ 								</div>
+ 								<div class="card-body">
+ 									<div class="table-responsive">
+
+ 										<table class="table" id="myTable">
+ 											<thead>
+ 												<tr>
+ 													<th>SEPET ID</th>
+ 													<th>USER ID</th>
+ 													<th>DATE</th>
+ 													<th>ORDER COUNT</th>
+ 												</tr>
+ 											</thead>
+ 											<tbody class="items">
+ 												<% @orders.each do |order| %>
+ 												<tr>
+ 													<td><%=link_to order.id,order_reqitems_path(order)%></td>
+ 													<td><%=order.user_id%></td>
+ 													<td><%=order.created_at.strftime('%d-%m-%Y')%></td>
+ 													<td><%=order.reqitems.count%></td>
+ 													<td><%= link_to 'Sil', order, method: :delete, data: { confirm: 'Are you sure?' } %></td> 												</tr>
+ 													<%end%>
+ 												</tbody>
+ 											</table>
+
+ 										</div>
+
+ 									</div>
+
+ 								</div>
+ 							</div>
+ 						</div>
 
  					</div>
-
  				</div>
- 			</div>
 
+ 			</div>
+ 			<%= render 'shared/footer'%>
  		</div>
- 		<%= render 'shared/footer'%>
  	</div>
- </div>

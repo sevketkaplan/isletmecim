@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	
+#	before_action :validate_user!,only: [:show,:edit,:update,:destroy]
 	before_action :select_user, only: [:show, :edit, :update, :destroy]
 	before_action only: [:edit, :update, :destroy] do
 		validate_permission! select_user
@@ -19,6 +19,8 @@ class UsersController < ApplicationController
 	end
 
 	def show
+		@user_orders=Order.where(user_id: current_user.id)
+		@orders = @user_orders.all.order('created_at DESC')
 	end
 	def edit
 	end

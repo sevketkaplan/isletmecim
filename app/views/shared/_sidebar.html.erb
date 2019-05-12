@@ -7,40 +7,41 @@
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
-      <li class="nav-item">
-        <a class="nav-link" href="<%=profile_path(current_user)%>">
-          <i class="material-icons">person_pin</i>
-          <p>Profilim</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="material-icons">shopping_basket</i>
-          <p>Siparis hazırla</p>
-        </a>
-      </li>          
+        <li class="nav-item">
+      <a class="nav-link" href="<%=profile_path(current_user)%>">
+        <i class="material-icons">person</i>
+        <p>Profilime Git</p>
+      </a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link" href="<%=new_brand_path%>">
+        <i class="material-icons">bookmarks</i>
+        <p>Marka Tanımla</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="material-icons">shopping_basket</i>
+        <p>Siparis hazırla</p>
+      </a>
+    </li>          
 
 
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="material-icons">import_export</i>
-          <p>Atamalar</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="material-icons">group</i>
-          <p>Kullanıcılar</p>
-        </a>
-      </li>
-      <%if signed_in?%>      
-      <li class="nav-item ">
-        <a class="nav-link" href="<%=logout_path%>"  data-method="delete">
-          <i class="material-icons">power_settings_new</i>
-          <p>Çıkış</p>
-        </a>
-      </li>
-      <%end%>
-    </ul>
-  </div>
+    
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="material-icons">group</i>
+        <p>Kullanıcılar</p>
+      </a>
+    </li>
+    <%if signed_in?%>      
+    <li class="nav-item ">
+      <a class="nav-link" href="<%=logout_path%>"  data-method="delete">
+        <i class="material-icons">power_settings_new</i>
+        <p>Çıkış</p>
+      </a>
+    </li>
+    <%end%>
+  </ul>
+</div>
 </div>
