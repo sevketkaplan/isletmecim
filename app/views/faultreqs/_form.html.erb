@@ -1,0 +1,42 @@
+   <div class="card">
+    <div class="card-header card-header-primary">
+      <img class="img pull-right" src="/assets/kep.png" style="width: 90px; height: 90px; padding-top: 20px;" />
+      <h4 class="card-title" style="padding-top: 20px;">Arıza Bildirimi</h4>
+      <p class="card-category">Arıza Bildiri Formu</p>
+    </div>
+    <div class="card-body">
+      <%=form_for @faultreq, data: {abide: ''} do |form|%>
+      <%if @faultreq.errors.any?%>
+      <div class="row panel callout radius">
+       <p>Aşağıdaki hataları düzeltip, tekrar deneyiniz.</p>
+       <ul class="square">
+         <%@faultreq.errors.full_messages.each do |message|%>
+         <li><%=message%></li>
+         <%end%>
+       </ul>
+     </div>
+     <%end%>
+     
+     <div class="row">
+      <div class="col-md-12">
+       <div class="form-group">
+        <label class="bmd-label-floating">Arıza Açıklaması</label>
+        <%=form.text_field :description ,class: "form-control"%>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <label class="bmd-label-floating">Arıza Yapan Ürünün Resmi</label> 
+      <%=form.file_field :image%>
+    </div>
+  </div>
+
+  
+
+
+  <button type="submit" class="btn btn-primary btn-block ">Arızayı Bildir</button>
+  <%end%>
+</div>
+</div>

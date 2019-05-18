@@ -3,7 +3,7 @@ class User < ApplicationRecord
 	has_many :customerbalances
 	has_many :orders
 	has_many :salesproducts
-
+	has_many :faultreqs
 
 	validates :username,   presence:   true,
 	exclusion: {in: ['oturum_ac']},

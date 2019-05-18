@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :faultreqs
   resources :orders do
     resources :reqitems
   end
