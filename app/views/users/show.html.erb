@@ -26,8 +26,19 @@
  						<div class="actions">
  							<%= form.submit 'Sipariş Oluştur',class: "btn btn-primary btn-round btn-block" %>
  						</div>
+ 						<% end %>	
+ 						<%= form_with(model: Basket.new, local: true) do |form| %>
+
+ 						<div class="field">
+
+ 							<%= form.hidden_field :req_key %>
+ 						</div>
+
+ 						<div class="actions">
+ 							<%= form.submit 'Satış Oluştur',class: "btn btn-primary btn-round btn-block" %>
+ 						</div>
  						<% end %>
- 						<hr>						
+ 						<hr>					
  						<% if current_user==@user%>
  						<%=link_to "Hesabı Düzenle", edit_user_path(@user), class: "btn btn-primary btn-round btn-block"%>
 
@@ -101,7 +112,7 @@
  			<%= render 'shared/footer'%>
  		</div>
  	</div>
- 
+ 	
  	<script>  
  		$(document).ready(function(){  
  			$('#search').keyup(function(){  

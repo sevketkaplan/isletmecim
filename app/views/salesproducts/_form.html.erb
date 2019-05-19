@@ -1,27 +1,8 @@
-<%= form_with(model: salesproduct, local: true) do |form| %>
-<% if salesproduct.errors.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(salesproduct.errors.count, "error") %> prohibited this salesproduct from being saved:</h2>
-
-  <ul>
-    <% salesproduct.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-
+<% Product.all.each do |product| %>
+<%= form_for([@basket, Salesproduct.new], :remote=>'true', :controller => 'salesproducts', :action => 'create') do |form| %>
 <div class="field">
-  <%= form.label :product_name %>
-  <%= form.collection_select :product_id, Product.all,:id,:name %>
+  <%=form.text_field :product_id,:value => product.id, id:"pid"%>
+ <label><%=product.name%></label> <%= form.text_field :unit,id:"amount" %><%=form.submit "Ekle",id:"ekle" %>
 </div>
-
-<div class="field">
-  <%= form.label :unit %>
-  <%= form.number_field :unit %>
-</div>
-
-<div class="actions">
-  <%= form.submit %>
-</div>
+<%end%>
 <% end %>

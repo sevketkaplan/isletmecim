@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_18_213117) do
+ActiveRecord::Schema.define(version: 2019_05_19_130337) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 2019_05_18_213117) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "baskets", force: :cascade do |t|
+    t.string "key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_baskets_on_user_id"
   end
 
   create_table "brands", force: :cascade do |t|
@@ -109,6 +117,8 @@ ActiveRecord::Schema.define(version: 2019_05_18_213117) do
     t.datetime "updated_at", null: false
     t.integer "product_id"
     t.integer "user_id"
+    t.integer "basket_id"
+    t.index ["basket_id"], name: "index_salesproducts_on_basket_id"
     t.index ["product_id"], name: "index_salesproducts_on_product_id"
     t.index ["user_id"], name: "index_salesproducts_on_user_id"
   end

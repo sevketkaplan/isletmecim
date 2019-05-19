@@ -7,14 +7,14 @@
 			<div class="container-fluid">
 
 				<div class="col-md-12">
-					<%= render 'form', salesproduct: @salesproduct %>
+					<%= render 'salesproducts/form', salesproduct: @salesproduct %>
 					<div class="card">
 						<div class="card-header card-header-primary">
 
 							<div class="row">
 								<div class="col-md-6">
 									<h4 class="card-title ">Satışlar</h4>
-									<p class="card-category">Sepet anahtarın: <%=Basket.find_by_user_id(current_user.id).key%></p>
+									<p class="card-category">Sepet anahtarın: <%=@basket.key%></p>
 								</div>
 								<div class="col-md-6">
 									<form class="navbar-form">
@@ -26,15 +26,11 @@
 											</button>
 										</div>
 									</form>  
-
 								</div>
 							</div>
-
 						</div>
-
-
 						<div class="all_data">
-							<%=render 'item'%>
+							<%=render 'salesproducts/item'%>
 						</div>
 
 					</div>

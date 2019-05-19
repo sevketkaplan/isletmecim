@@ -4,7 +4,7 @@ class User < ApplicationRecord
 	has_many :orders
 	has_many :salesproducts
 	has_many :faultreqs
-
+	has_many :baskets
 	validates :username,   presence:   true,
 	exclusion: {in: ['oturum_ac']},
 	uniqueness: { case_sensitive: false },

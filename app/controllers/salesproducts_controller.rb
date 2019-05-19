@@ -1,6 +1,7 @@
 class SalesproductsController < ApplicationController
   before_action :set_salesproduct, only: [:show, :edit, :update, :destroy]
   before_action :set_customerbalance,only: [:edit, :update]
+  before_action :set_basket
   # GET /salesproducts
   # GET /salesproducts.json
   def index
@@ -14,8 +15,9 @@ class SalesproductsController < ApplicationController
 
   # GET /salesproducts/new
   def new
-    @salesproduct = Salesproduct.new
-  end
+   @products=Product.all
+   @salesproduct = @basket.salesproducts.new
+ end
 
   # GET /salesproducts/1/edit
   def edit
@@ -24,7 +26,7 @@ class SalesproductsController < ApplicationController
   # POST /salesproducts
   # POST /salesproducts.json
   def create
-    @salesproduct = Salesproduct.new(salesproduct_params)
+    @salesproduct = @basket.salesproducts.build(salesproduct_params)
     @salesproduct.user_id=current_user.id
     @product=Product.find(@salesproduct.product_id)
     @salesproduct.total_price=@product.unit_price*@salesproduct.unit
@@ -45,7 +47,7 @@ class SalesproductsController < ApplicationController
           @customerbalance=Customerbalance.new(:user_id=>@salesproduct.user_id,:total_balance=> @salesproduct.total_price)
           @customerbalance.save
         end
-
+        format.js
         format.html { redirect_to @salesproduct, notice: 'Salesproduct was successfully created.' }
         format.json { render :show, status: :created, location: @salesproduct }     
       else
@@ -78,11 +80,15 @@ end
   # DELETE /salesproducts/1
   # DELETE /salesproducts/1.json
   def destroy
-    @salesproduct.destroy
+    @product=Product.find(@salesproduct.product_id)
+    @product.amount+=@salesproduct.unit
+    @product.save
     @customerbalance=Customerbalance.find_by_user_id(@salesproduct.user_id)
     @customerbalance.total_balance-=@salesproduct.total_price
     @customerbalance.save
-
+    
+    @salesproduct.destroy
+    
     respond_to do |format|
       format.html { redirect_to salesproducts_url, notice: 'Salesproduct was successfully destroyed.' }
       format.json { head :no_content }
@@ -91,10 +97,12 @@ end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_basket
+      @basket=Basket.find(params[:basket_id])
+    end
     def set_salesproduct
       @salesproduct = Salesproduct.find(params[:id])
     end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def salesproduct_params
       params.require(:salesproduct).permit(:product_id,:unit, :total_price)
@@ -102,7 +110,5 @@ end
     def set_customerbalance
       @customerbalance = Customerbalance.find(params[:id])
     end
-    def customerbalance_params
-      
-    end
+    
   end

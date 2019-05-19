@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   resources :orders do
     resources :reqitems
   end
+  resources :baskets do
+    resources :salesproducts
+  end
   
   resources :customerbalances
-  resources :salesproducts
+  
   resources :products
   resources :brands
   get 'customer/index'
