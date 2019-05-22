@@ -3,8 +3,10 @@ class User < ApplicationRecord
 	has_many :customerbalances
 	has_many :orders
 	has_many :salesproducts
+	has_many :tecnichsales
 	has_many :faultreqs
 	has_many :baskets
+	has_many :technicalsupports
 	validates :username,   presence:   true,
 	exclusion: {in: ['oturum_ac']},
 	uniqueness: { case_sensitive: false },

@@ -18,11 +18,11 @@
             <hr>
 
             <br>
-            <%= form_with(model: @basket, local: true) do |form| %>
+            <%= form_with(model: Order.new, local: true) do |form| %>
 
             <div class="field">
 
-              <%= form.hidden_field :key %>
+              <%= form.hidden_field :req_key %>
             </div>
 
             <div class="actions">
@@ -33,7 +33,7 @@
 
             <div class="field">
 
-              <%= form.hidden_field :req_key %>
+              <%= form.hidden_field :key %>
             </div>
 
             <div class="actions">
@@ -77,6 +77,7 @@
                      <th>USER ID</th>
                      <th>DATE</th>
                      <th>PRODUCT COUNT</th>
+                     <th>TOTAL PRICE</th>
                    </tr>
                  </thead>
                  <tbody class="items">
@@ -86,6 +87,7 @@
                     <td><%=basket.user_id%></td>
                     <td><%=basket.created_at.strftime('%d-%m-%Y')%></td>
                     <td><%=basket.salesproducts.count%></td>
+                    <td><%=basket.salesproducts.sum(:total_price)%></td>
                     <td><%= link_to 'Sil', basket, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
                   </tr>
                   <%end%>

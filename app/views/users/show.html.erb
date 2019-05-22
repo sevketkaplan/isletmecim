@@ -16,6 +16,8 @@
  						<hr> 
  						<h3 class="text-center"><%=@user.first_name%>  <%=@user.last_name%></h3>
  						<hr>
+
+ 						<%=link_to 'New Technicalsupport Form', new_technicalsupport_path,class: "btn btn-primary btn-round btn-block"%>
  						<%= form_with(model: Order.new, local: true) do |form| %>
 
  						<div class="field">
@@ -31,7 +33,7 @@
 
  						<div class="field">
 
- 							<%= form.hidden_field :req_key %>
+ 							<%= form.hidden_field :key %>
  						</div>
 
  						<div class="actions">

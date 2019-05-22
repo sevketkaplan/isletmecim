@@ -29,8 +29,11 @@ class BasketsController < ApplicationController
     @basket = Basket.new(basket_params)
     @basket.user=current_user
     @basket.key=string
+
     respond_to do |format|
       if @basket.save
+
+        
         format.html { redirect_to @basket, notice: 'Basket was successfully created.' }
         format.json { render :show, status: :created, location: @basket }
       else

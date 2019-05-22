@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :technicalsupports do
+    resources :tecnichsales 
+  end
   resources :faultreqs
   resources :orders do
     resources :reqitems
@@ -6,7 +9,7 @@ Rails.application.routes.draw do
   resources :baskets do
     resources :salesproducts
   end
-  
+
   resources :customerbalances
   
   resources :products

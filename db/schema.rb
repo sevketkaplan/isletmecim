@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_19_130337) do
+ActiveRecord::Schema.define(version: 2019_05_19_234238) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2019_05_19_130337) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.float "total_price"
     t.index ["user_id"], name: "index_baskets_on_user_id"
   end
 
@@ -121,6 +122,30 @@ ActiveRecord::Schema.define(version: 2019_05_19_130337) do
     t.index ["basket_id"], name: "index_salesproducts_on_basket_id"
     t.index ["product_id"], name: "index_salesproducts_on_product_id"
     t.index ["user_id"], name: "index_salesproducts_on_user_id"
+  end
+
+  create_table "technicalsupports", force: :cascade do |t|
+    t.float "workmanship_price"
+    t.float "total_price"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "key"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_technicalsupports_on_user_id"
+  end
+
+  create_table "tecnichsales", force: :cascade do |t|
+    t.integer "unit"
+    t.float "total_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "technicalsupport_id"
+    t.integer "product_id"
+    t.index ["product_id"], name: "index_tecnichsales_on_product_id"
+    t.index ["technicalsupport_id"], name: "index_tecnichsales_on_technicalsupport_id"
+    t.index ["user_id"], name: "index_tecnichsales_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
