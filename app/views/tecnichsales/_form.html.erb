@@ -1,0 +1,8 @@
+<% Product.all.each do |product| %>
+<%= form_for([@technicalsupport, Tecnichsale.new], :remote=>'true', :controller => 'tecnichsales', :action => 'create') do |form| %>
+<div class="field">
+  <%=form.text_field :product_id,:value => product.id, id:"pid"%>
+ <label><%=product.name%></label> <%= form.text_field :unit,id:"amount" %><%=form.submit "Ekle",id:"ekle" %>
+</div>
+<%end%>
+<% end %>

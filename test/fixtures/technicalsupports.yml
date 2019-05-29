@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  workmanship_price: 1.5
+  total_price: 1.5
+  description: MyText
+
+two:
+  workmanship_price: 1.5
+  total_price: 1.5
+  description: MyText

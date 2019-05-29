@@ -16,12 +16,12 @@
  						<hr> 
  						<h3 class="text-center"><%=@user.first_name%>  <%=@user.last_name%></h3>
  						<hr>
-
- 						<%=link_to 'New Technicalsupport Form', new_technicalsupport_path,class: "btn btn-primary btn-round btn-block"%>
+ 						
+ 						<%=link_to 'New Technicalsupport Form', new_technicalsupport_path(:u_id=>@user.id),class: "btn btn-primary btn-round btn-block"%>
  						<%= form_with(model: Order.new, local: true) do |form| %>
 
  						<div class="field">
-
+ 							<%=form.hidden_field :user_id, value:@user.id%>
  							<%= form.hidden_field :req_key %>
  						</div>
 
@@ -32,6 +32,7 @@
  						<%= form_with(model: Basket.new, local: true) do |form| %>
 
  						<div class="field">
+ 							<%=form.hidden_field :user_id, value:@user.id%>
 
  							<%= form.hidden_field :key %>
  						</div>

@@ -15,20 +15,8 @@
             </div>
             <hr> 
             <h3 class="text-center"><%=current_user.first_name%>  <%=current_user.last_name%></h3>
-            <hr>
-
-            <%= form_with(model: Order.new, local: true) do |form| %>
-
-            <div class="field">
-
-              <%= form.hidden_field :req_key %>
-            </div>
-
-            <div class="actions">
-              <%= form.submit 'Sipariş Oluştur',class: "btn btn-primary btn-round btn-block" %>
-            </div>
-            <% end %> 
-         
+            <hr>          
+            
           </div><!--/col-3-->
           <div class="col-md-9">
             <div class="col-md-12">
@@ -37,8 +25,8 @@
 
                  <div class="row">
                   <div class="col-md-6">
-                    <h4 class="card-title ">Siparisler</h4>
-                    <p class="card-category">Siparis Listesi</p>
+                    <h4 class="card-title ">Kullanıcılar</h4>
+                    <p class="card-category">Kullanıcılar Listesi</p>
                   </div>
                   <div class="col-md-6">
 
@@ -61,35 +49,29 @@
                  <table class="table" id="myTable">
                   <thead>
                     <tr>
-                     <th>SEPET ID</th>
-                     <th>USER ID</th>
-                     <th>DATE</th>
-                     <th>ORDER COUNT</th>
+                     <th>Adı Soyadı</th>
+                     <th>Şirket Adı</th>
+                     <th>Seçenekler</th>
+                     
                    </tr>
                  </thead>
                  <tbody class="items">
-                  <% @orders.each do |order| %>
+                  <% @users.each do |user| %>
                   <tr>
-                    <td><%=link_to order.req_key,order_reqitems_path(order)%></td>
-                    <td><%=order.user_id%></td>
-                    <td><%=order.created_at.strftime('%d-%m-%Y')%></td>
-                    <td><%=order.reqitems.count%></td>
+                    <td><%=user.first_name%>  <%=user.last_name%></td>
+                    <td><%=user.company_name%></td>
+                    <td><%= link_to 'Göster',profile_path(user)%><%= link_to 'Sil' ,user, method: :delete, data: { confirm: 'Are you sure?' }%></td>              
                   </tr>
                   <%end%>
                 </tbody>
               </table>
-
             </div>
-
           </div>
-
         </div>
       </div>
     </div>
-
   </div>
 </div>
-
 </div>
 <%= render 'shared/footer'%>
 </div>

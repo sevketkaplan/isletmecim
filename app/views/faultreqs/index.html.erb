@@ -19,21 +19,13 @@
             <%= form_with(model: Order.new, local: true) do |form| %>
 
             <div class="field">
-
               <%= form.hidden_field :req_key %>
             </div>
 
             <div class="actions">
               <%= form.submit 'Sipariş Oluştur',class: "btn btn-primary btn-round btn-block" %>
             </div>
-            <% end %>
-            <hr>            
-            <% if current_user==@user%>
-            <%=link_to "Hesabı Düzenle", edit_user_path(@user), class: "btn btn-primary btn-round btn-block"%>
-
-            <%= button_to "Hesabı sil", @user, method: :delete, data:{confirm: 'Hesabı silmek istediğinize emin misiniz?'}, class: "btn btn-primary btn-round btn-block" %></p>
-            <%end%>
-            <br>
+            <% end %> 
           </div><!--/col-3-->
 
 

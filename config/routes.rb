@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get '/oturum_ac', to: 'sessions#new', as: :login
   delete '/oturumu_kapat', to: 'sessions#destroy', as: :logout
 
-  resources :users, except: :index
+  resources :users
   get '/kaydol', to: 'users#new',  as: :register
   get '/users/new', to: redirect('/kaydol')
   get '/:id', to: 'users#show', as: :profile

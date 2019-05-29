@@ -5,7 +5,7 @@ class SalesproductsController < ApplicationController
   # GET /salesproducts
   # GET /salesproducts.json
   def index
-    @salesproducts = Salesproduct.all
+    @salesproducts = Salesproduct.all.order("created_at DESC")
   end
 
   # GET /salesproducts/1
@@ -27,7 +27,7 @@ class SalesproductsController < ApplicationController
   # POST /salesproducts.json
   def create
     @salesproduct = @basket.salesproducts.build(salesproduct_params)
-    @salesproduct.user_id=current_user.id
+    @salesproduct.user_id=@basket.user_id
     @product=Product.find(@salesproduct.product_id)
     @salesproduct.total_price=@product.unit_price*@salesproduct.unit
 

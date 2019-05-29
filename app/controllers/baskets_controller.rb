@@ -4,7 +4,7 @@ class BasketsController < ApplicationController
   # GET /baskets
   # GET /baskets.json
   def index
-    @baskets = Basket.all
+    @baskets = Basket.all.order("created_at DESC")
   end
 
   # GET /baskets/1
@@ -27,7 +27,7 @@ class BasketsController < ApplicationController
     o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
     string = (0...11).map { o[rand(o.length)] }.join
     @basket = Basket.new(basket_params)
-    @basket.user=current_user
+    
     @basket.key=string
 
     respond_to do |format|
@@ -81,6 +81,6 @@ class BasketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def basket_params
-      params.require(:basket).permit(:key)
+      params.require(:basket).permit(:key,:user_id)
     end
   end

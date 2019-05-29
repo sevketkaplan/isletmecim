@@ -1,0 +1,93 @@
+ <div class="wrapper ">
+ 	<%= render 'shared/sidebar'%>
+ 	<div class="main-panel">
+ 		<%= render 'shared/navbar'%>
+ 		<div class="content">
+
+ 			<div class="container-fluid">
+
+ 				<br>
+ 				<div class="row">
+ 					<div class="col-md-3"><!--left col-->
+
+ 						<div class="text-center">
+ 							<img src="/assets/kep.png" style="width: 250px; height: 200px;" class="avatar img-circle img-thumbnail" alt="avatar">
+ 						</div>
+ 						<hr> 
+ 						<h3 class="text-center"><%=current_user.first_name%>  <%=current_user.last_name%></h3>
+ 						<hr>
+
+ 						<%=link_to 'New Technicalsupport Form', new_technicalsupport_path,class: "btn btn-primary btn-round btn-block"%>
+ 						<%= form_with(model: Order.new, local: true) do |form| %>
+
+ 						<div class="field">
+
+ 							<%= form.hidden_field :req_key %>
+ 						</div>
+
+ 						<div class="actions">
+ 							<%= form.submit 'Sipariş Oluştur',class: "btn btn-primary btn-round btn-block" %>
+ 						</div>
+ 						<% end %>	
+ 						<%= form_with(model: Basket.new, local: true) do |form| %>
+
+ 						<div class="field">
+
+ 							<%= form.hidden_field :key %>
+ 						</div>
+
+ 						<div class="actions">
+ 							<%= form.submit 'Satış Oluştur',class: "btn btn-primary btn-round btn-block" %>
+ 						</div>
+ 						<% end %>
+ 						<hr>					
+ 						<% if current_user==@user%>
+ 						<%=link_to "Hesabı Düzenle", edit_user_path(@user), class: "btn btn-primary btn-round btn-block"%>
+
+ 						<%= button_to "Hesabı sil", @user, method: :delete, data:{confirm: 'Hesabı silmek istediğinize emin misiniz?'}, class: "btn btn-primary btn-round btn-block" %></p>
+ 						<%end%>
+ 						<br>
+ 					</div><!--/col-3-->
+
+
+ 					<div class="col-md-9">
+ 						<%= render 'form', technicalsupport: @technicalsupport %>
+
+
+ 					</div>
+
+ 				</div>
+ 			</div>
+
+ 		</div>
+ 		<%= render 'shared/footer'%>
+ 	</div>
+ </div>
+
+ <script>  
+ 	$(document).ready(function(){  
+ 		$('#search').keyup(function(){  
+ 			search_table($(this).val());  
+ 		});  
+ 		function search_table(value){  
+ 			$('#myTable tr').each(function(){  
+ 				var found = 'false';  
+ 				$(this).each(function(){  
+ 					if($(this).text().toUpperCase().indexOf(value.toUpperCase()) >= 0)  
+ 					{  
+ 						found = 'true';  
+ 					}  
+ 				});  
+ 				if(found == 'true')  
+ 				{  
+ 					$(this).show();  
+ 				}  
+ 				else  
+ 				{  
+ 					$(this).hide();  
+ 				}  
+ 			});  
+ 		}  
+ 	});  
+ </script>  
+

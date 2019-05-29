@@ -1,0 +1,54 @@
+  <div class="card">
+    <div class="card-header card-header-primary">
+      <img class="img pull-right" src="/assets/kep.png" style="width: 90px; height: 90px; padding-top: 20px;" />
+      <h4 class="card-title" style="padding-top: 20px;">Kayıt</h4>
+      <p class="card-category">Otomasyon Kayıt</p>
+    </div>
+    <div class="card-body">
+      <%=form_for @technicalsupport, data: {abide: ''} do |form|%>
+      <%if @technicalsupport.errors.any?%>
+      <div class="row panel callout radius">
+        <p>Aşağıdaki hataları düzeltip, tekrar deneyiniz.</p>
+        <ul class="square">
+          <%@technicalsupport.errors.full_messages.each do |message|%>
+          <li><%=message%></li>
+          <%end%>
+        </ul>
+      </div>
+      <%end%>
+      <% if technicalsupport.user_id.blank? %>
+      <% uid = params[:user_id] %>
+      <% else %>
+      <% uid = technicalsupport.user_id  %>
+      <% end %>
+
+      <%=form.hidden_field :user_id,:value=>params[:u_id]%>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="bmd-label-floating">Teknik Bakım Açıklaması</label>
+            <%=form.text_area :description, class: "form-control"%>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="bmd-label-floating">İşçilik Ücreti</label>
+            <%=form.number_field :workmanship_price, class: "form-control"%>
+          </div>
+        </div>
+      </div>      
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= link_to 'Geri', :back, class: "btn btn-primary btn-block" %>
+        </div>
+        <div class="col-md-6"><button type="submit" class="btn btn-primary btn-block ">Kaydet</button>
+        </div>
+      </div>
+      <%end%>
+    </div>
+  </div>
