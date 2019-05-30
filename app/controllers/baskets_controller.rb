@@ -5,8 +5,14 @@ class BasketsController < ApplicationController
   # GET /baskets
   # GET /baskets.json
   def index
-     @baskets=Basket.where(user_id: params[:user_id]).order("created_at DESC")
-     @user=User.find(params[:user_id])
+
+    if params[:user_id]==nil
+      @user=current_user
+      @baskets=Basket.all.order("created_at DESC")
+    else
+      @user=User.find(params[:user_id])
+      @baskets=Basket.where(user_id: params[:user_id]).order("created_at DESC")
+    end
   end
 
   # GET /baskets/1

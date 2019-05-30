@@ -1,8 +1,8 @@
- <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+ <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/sidebar-2.jpg">
 
   <div class="logo">
     <a href="#" class="simple-text logo-normal">
-      Video Portal
+      Müşteri Takip Otomasyonu
     </a>
   </div>
   <div class="sidebar-wrapper">
@@ -13,12 +13,21 @@
           <p>Profilime Git</p>
         </a>
       </li>
+      <%if current_user.admin?%>
       <li class="nav-item">
         <a class="nav-link" href="<%=new_brand_path%>">
           <i class="material-icons">bookmarks</i>
           <p>Marka Tanımla</p>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%=new_product_path%>">
+          <i class="material-icons">bookmarks</i>
+          <p>Ürün Ekle</p>
+        </a>
+      </li>
+      
+      <%end%>
       <li class="nav-item">
         <a class="nav-link" href="<%=new_faultreq_path%>">
           <i class="fas fa-tools"></i>
@@ -32,13 +41,13 @@
         </a>
       </li>          
       <li class="nav-item">
-        <a class="nav-link" href="<%=baskets_path%>">
+        <a class="nav-link" href="<%=baskets_path(:user_id=>nil)%>">
           <i class="material-icons">shopping_basket</i>
           <p>Satış Sepet Listeleri</p>
         </a>
       </li>     
       <li class="nav-item">
-        <a class="nav-link" href="<%=technicalsupports_path%>">
+        <a class="nav-link" href="<%=technicalsupports_path(:user_id=>nil)%>">
           <i class="fas fa-wrench"></i>
           <p>Teknik Destek Bakım Listesi</p>
         </a>

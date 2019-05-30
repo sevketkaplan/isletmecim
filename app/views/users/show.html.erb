@@ -2,9 +2,7 @@
  	<%= render 'shared/sidebar'%>
  	<div class="main-panel">
  		<%= render 'shared/navbar'%>
- 		
  		<div class="content">
-
  			<div class="container-fluid">
  				<div class="row">
  					<div class="col-lg-4 col-md-6 col-sm-6">
@@ -41,7 +39,7 @@
  					</div>
  					<div class="col-lg-4 col-md-6 col-sm-6">
  						<div class="card card-stats">
- 							<div class="card-header card-header-success card-header-icon">
+ 							<div class="card-header card-header-danger card-header-icon">
  								<div class="card-icon">
  									<i class="fa fa-tools"></i>
  								</div>
@@ -69,6 +67,7 @@
  						<hr>
  						
  						<%=link_to 'New Technicalsupport Form', new_technicalsupport_path(:u_id=>@user.id),class: "btn btn-primary btn-round btn-block"%>
+
  						<%= form_with(model: Order.new, local: true) do |form| %>
 
  						<div class="field">
@@ -100,8 +99,6 @@
  						<%end%>
  						<br>
  					</div><!--/col-3-->
-
-
  					<div class="col-md-9">
  						<div class="col-md-12">
  							<div class="row">

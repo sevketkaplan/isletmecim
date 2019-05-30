@@ -4,53 +4,57 @@ class TechnicalsupportsController < ApplicationController
 
 
   def index
-    
+   if params[:user_id]==nil
+    @user=current_user
+    @technicalsupports=Technicalsupport.all.order("created_at DESC")
+  else    
     @technicalsupports = Technicalsupport.where(user_id: params[:user_id]).order("created_at DESC")
     @user=User.find(params[:user_id])
   end
-
-  
-  def show
-  end
-
-  def new
-
-    @technicalsupport = Technicalsupport.new
-    @user=User.find(params[:u_id])
-  end
-
-  def edit
-  end
+end
 
 
-  def create
-   o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
-   string = (0...11).map { o[rand(o.length)] }.join
-   @technicalsupport = Technicalsupport.new(technicalsupport_params)
+def show
+end
 
-   @technicalsupport.key=string
+def new
+
+  @technicalsupport = Technicalsupport.new
+  @user=User.find(params[:u_id])
+end
+
+def edit
+end
 
 
-   respond_to do |format|
-    if @technicalsupport.save
+def create
+ o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
+ string = (0...11).map { o[rand(o.length)] }.join
+ @technicalsupport = Technicalsupport.new(technicalsupport_params)
 
-      if Customerbalance.exists?(user_id: @technicalsupport.user_id)
-        @customerbalance=Customerbalance.find_by_user_id(@technicalsupport.user_id)
+ @technicalsupport.key=string
 
-        @customerbalance.user_id=@technicalsupport.user_id
-        @customerbalance.total_balance+=@technicalsupport.workmanship_price
-        @customerbalance.save
-      else
-        @customerbalance=Customerbalance.new(:user_id=>@technicalsupport.user_id,:total_balance=> @technicalsupport.workmanship_price)
-        @customerbalance.save
-      end
-      format.html { redirect_to @technicalsupport, notice: 'Technicalsupport was successfully created.' }
-      format.json { render :show, status: :created, location: @technicalsupport }
+
+ respond_to do |format|
+  if @technicalsupport.save
+
+    if Customerbalance.exists?(user_id: @technicalsupport.user_id)
+      @customerbalance=Customerbalance.find_by_user_id(@technicalsupport.user_id)
+
+      @customerbalance.user_id=@technicalsupport.user_id
+      @customerbalance.total_balance+=@technicalsupport.workmanship_price
+      @customerbalance.save
     else
-      format.html { render :new }
-      format.json { render json: @technicalsupport.errors, status: :unprocessable_entity }
+      @customerbalance=Customerbalance.new(:user_id=>@technicalsupport.user_id,:total_balance=> @technicalsupport.workmanship_price)
+      @customerbalance.save
     end
+    format.html { redirect_to @technicalsupport, notice: 'Technicalsupport was successfully created.' }
+    format.json { render :show, status: :created, location: @technicalsupport }
+  else
+    format.html { render :new }
+    format.json { render json: @technicalsupport.errors, status: :unprocessable_entity }
   end
+end
 end
 
 
