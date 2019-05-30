@@ -1,35 +1,44 @@
 class ApplicationController < ActionController::Base
  # before_action :validate_user!  
-  protect_from_forgery with: :exception
-  helper_method :signed_in?, :current_user
+ protect_from_forgery with: :exception
+ helper_method :signed_in?, :current_user,:admin_check, :admin?
 
-  private
+ private
 
-  def login(user)
-    session[:user_id] = user.id
+ def login(user)
+  session[:user_id] = user.id
+end
+
+def logout
+  session[:user_id] = nil
+end
+
+def current_user
+  @current_user ||= User.find(session[:user_id]) if session[:user_id]
+end
+
+def signed_in?
+  current_user
+end
+def admin?
+  signed_in? && current_user.admin==true
+end
+
+def admin_check
+  if current_user.admin==false
+    render :file => "/public/404.html",  :status => 404
   end
+end
 
-  def logout
-    session[:user_id] = nil
+def validate_user!
+  unless signed_in?
+    redirect_to login_url, alert: 'Bu sayfaya erişmeden önce oturum açmalısınız.'
   end
+end
 
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+def validate_permission!(user)
+  unless current_user == user
+    redirect_to root_url, alert: 'Bu işlemi gerçekleştirmek için gerekli olan yetkiye sahip değilsiniz!'
   end
-
-  def signed_in?
-    current_user
-  end
-
-  def validate_user!
-    unless signed_in?
-      redirect_to login_url, alert: 'Bu sayfaya erişmeden önce oturum açmalısınız.'
-    end
-  end
-
-  def validate_permission!(user)
-    unless current_user == user
-      redirect_to root_url, alert: 'Bu işlemi gerçekleştirmek için gerekli olan yetkiye sahip değilsiniz!'
-    end
-  end
+end
 end

@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 	end
 	def create
 		@user=User.new(user_params)
+		@user.admin=false
 		if @user.save
 			login(@user)
 			redirect_to @user, notice: 'Aramıza hoşgeldin.'

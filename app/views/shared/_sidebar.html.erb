@@ -44,14 +44,38 @@
         </a>
       </li> 
 
-
-
       <li class="nav-item">
         <a class="nav-link" href="<%=users_path%>">
           <i class="material-icons">group</i>
           <p>Kullanıcılar</p>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%=users_path%>">
+          <i class="material-icons">group</i>
+          <p>Kullanıcılar</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%=users_path%>">
+          <i class="material-icons">group</i>
+          <p>Kullanıcılar</p>
+        </a>
+      </li>
+      <%if current_user.admin?%>
+      <li class="nav-item">
+        <a class="nav-link" href="<%=users_path%>">
+          <i class="material-icons">group</i>
+          <p>Kullanıcılar</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%=customerbalances_path%>">
+          <i class="material-icons">group</i>
+          <p>Müşteri Bakiyeleri</p>
+        </a>
+      </li>
+      <%end%>
       <%if signed_in?%>      
       <li class="nav-item ">
         <a class="nav-link" href="<%=logout_path%>"  data-method="delete">

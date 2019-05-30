@@ -5,8 +5,7 @@ class BrandsController < ApplicationController
   #before_action only: [:edit, :update, :destroy] do
    # validate_permission!(current_user)
   #end
-
-
+  before_action :admin_check
   before_action :set_brand, only: [:edit, :update, :destroy, :show]
   # GET /brands
   # GET /brands.json

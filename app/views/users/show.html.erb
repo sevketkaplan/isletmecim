@@ -53,92 +53,74 @@
 
  					<div class="col-md-9">
  						<div class="col-md-12">
- 							<div class="card">
- 								<div class="card-header card-header-primary">
-
- 									<div class="row">
- 										<div class="col-md-6">
- 											<h4 class="card-title ">Siparisler</h4>
- 											<p class="card-category">Siparis Listesi</p>
+ 							<div class="row">
+ 								<div class=" col-md-6 col-sm-6">
+ 									<div class="card card-stats">
+ 										<div class="card-header card-header-success card-header-icon">
+ 											<div class="card-icon">
+ 												<i class="material-icons">store</i>
+ 											</div>
+ 											<p class="card-category"></p>
+ 											<h3><%=link_to 'Yapılan Tüm Bakımlar',technicalsupports_path(:user_id=>@user.id),class: "card-title"%></h3>
  										</div>
- 										<div class="col-md-6">
-
- 											<form class="navbar-form">
- 												<div class="input-group no-border">
- 													<input type="text" id="search" onkeyup="myFunction()" value="" class="form-control" placeholder="Kullanıcı İsiminde Arayınız." style="color: white;">
- 													<button type="submit" class="btn btn-white btn-round btn-just-icon">
- 														<i class="material-icons">search</i>
- 														<div class="ripple-container"></div>
- 													</button>
- 												</div>
- 											</form>  
-
+ 										<div class="card-footer">
+ 											<div class="stats">
+ 												<i class="material-icons">date_range</i> Last 24 Hours
+ 											</div>
  										</div>
  									</div>
  								</div>
- 								<div class="card-body">
- 									<div class="table-responsive">
-
- 										<table class="table" id="myTable">
- 											<thead>
- 												<tr>
- 													<th>SEPET ID</th>
- 													<th>USER ID</th>
- 													<th>DATE</th>
- 													<th>ORDER COUNT</th>
- 												</tr>
- 											</thead>
- 											<tbody class="items">
- 												<% @orders.each do |order| %>
- 												<tr>
- 													<td><%=link_to order.id,order_reqitems_path(order)%></td>
- 													<td><%=order.user_id%></td>
- 													<td><%=order.created_at.strftime('%d-%m-%Y')%></td>
- 													<td><%=order.reqitems.count%></td>
- 													<td><%= link_to 'Sil', order, method: :delete, data: { confirm: 'Are you sure?' } %></td> 												</tr>
- 													<%end%>
- 												</tbody>
- 											</table>
-
+ 								<div class=" col-md-6 col-sm-6">
+ 									<div class="card card-stats">
+ 										<div class="card-header card-header-success card-header-icon">
+ 											<div class="card-icon">
+ 												<i class="fa fa-shopping-basket"></i>
+ 											</div>
+ 											<p class="card-category"></p>
+ 											<h5><%=link_to 'Alınan Malların Sepet Listesi', baskets_path(:user_id=>@user.id), class: "card-title"%></h5>
  										</div>
-
+ 										<div class="card-footer">
+ 											<div class="stats">
+ 												<i class="material-icons">date_range</i> Last 24 Hours
+ 											</div>
+ 										</div>
  									</div>
-
  								</div>
  							</div>
  						</div>
-
  					</div>
- 				</div>
 
+ 				</div>
  			</div>
- 			<%= render 'shared/footer'%>
+
  		</div>
+ 		<%= render 'shared/footer'%>
  	</div>
- 	
- 	<script>  
- 		$(document).ready(function(){  
- 			$('#search').keyup(function(){  
- 				search_table($(this).val());  
- 			});  
- 			function search_table(value){  
- 				$('#myTable tr').each(function(){  
- 					var found = 'false';  
- 					$(this).each(function(){  
- 						if($(this).text().toUpperCase().indexOf(value.toUpperCase()) >= 0)  
- 						{  
- 							found = 'true';  
- 						}  
- 					});  
- 					if(found == 'true')  
+ </div>
+
+ <script>  
+ 	$(document).ready(function(){  
+ 		$('#search').keyup(function(){  
+ 			search_table($(this).val());  
+ 		});  
+ 		function search_table(value){  
+ 			$('#myTable tr').each(function(){  
+ 				var found = 'false';  
+ 				$(this).each(function(){  
+ 					if($(this).text().toUpperCase().indexOf(value.toUpperCase()) >= 0)  
  					{  
- 						$(this).show();  
- 					}  
- 					else  
- 					{  
- 						$(this).hide();  
+ 						found = 'true';  
  					}  
  				});  
- 			}  
- 		});  
- 	</script>  
+ 				if(found == 'true')  
+ 				{  
+ 					$(this).show();  
+ 				}  
+ 				else  
+ 				{  
+ 					$(this).hide();  
+ 				}  
+ 			});  
+ 		}  
+ 	});  
+ </script>  

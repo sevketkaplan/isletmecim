@@ -1,10 +1,12 @@
 class BasketsController < ApplicationController
+  before_action :admin_check, only: [:edit,:update,:destroy,:new,:create]
   before_action :set_basket, only: [:show, :edit, :update, :destroy]
 
   # GET /baskets
   # GET /baskets.json
   def index
-    @baskets = Basket.all.order("created_at DESC")
+     @baskets=Basket.where(user_id: params[:user_id]).order("created_at DESC")
+     @user=User.find(params[:user_id])
   end
 
   # GET /baskets/1
@@ -33,7 +35,7 @@ class BasketsController < ApplicationController
     respond_to do |format|
       if @basket.save
 
-        
+
         format.html { redirect_to @basket, notice: 'Basket was successfully created.' }
         format.json { render :show, status: :created, location: @basket }
       else

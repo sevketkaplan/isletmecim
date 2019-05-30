@@ -1,9 +1,12 @@
 class TechnicalsupportsController < ApplicationController
+  before_action :admin_check, only: [:edit,:update,:destroy,:new,:create]
   before_action :set_technicalsupport, only: [:show, :edit, :update, :destroy]
 
 
   def index
-    @technicalsupports = Technicalsupport.all.order("created_at DESC")
+    
+    @technicalsupports = Technicalsupport.where(user_id: params[:user_id]).order("created_at DESC")
+    @user=User.find(params[:user_id])
   end
 
   

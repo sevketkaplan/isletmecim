@@ -1,6 +1,8 @@
 class CustomerbalancesController < ApplicationController
-  before_action :set_customerbalance, only: [:show]
+  before_action :admin_check
+  before_action :set_customerbalance, only: [:show, :edit, :update, :destroy]
 
+  
   # GET /customerbalances
   # GET /customerbalances.json
   def index
@@ -71,4 +73,4 @@ class CustomerbalancesController < ApplicationController
     def customerbalance_params
       params.require(:customerbalance).permit(:total_balance)
     end
-end
+  end
