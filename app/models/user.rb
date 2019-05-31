@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 	has_secure_password
+	has_many :notifications, foreign_key: :recipient_id
+	
 	has_many :customerbalances
 	has_many :orders
 	has_many :salesproducts

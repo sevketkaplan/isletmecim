@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     resources :salesproducts
   end
 
+  resources :notifications do
+    collection do
+      post :mark_as_read
+    end
+  end
+
   resources :customerbalances
   
   resources :products

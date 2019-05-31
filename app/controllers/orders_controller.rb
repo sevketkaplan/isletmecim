@@ -32,8 +32,12 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.user=current_user
     @order.req_key=string
+    @user=User.where(:admin=>true)
     respond_to do |format|
       if @order.save
+
+          Notification.create(recipient:@user.first,actor:current_user,action:"order",notifiable:@order)
+        
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
@@ -50,7 +54,7 @@ class OrdersController < ApplicationController
    string = (0...11).map { o[rand(o.length)] }.join
 
    respond_to do |format|
-    
+
     if @order.update(order_params)
       @order.req_key=string
       @order.save
