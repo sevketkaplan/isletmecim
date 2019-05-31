@@ -8,7 +8,6 @@ setup: ->
 	method: "GET"
 	success: @handleSuccess
 	)
-
 	handleSuccess: (data) =>
 		console.log("hello")
 		items = $.map data, (notification) ->
